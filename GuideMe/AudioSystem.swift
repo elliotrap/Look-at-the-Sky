@@ -84,8 +84,20 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
         do {
             // Setup the audio session
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playAndRecord, mode: .default)
+            
+            // Set category with options to default to speaker and allow Bluetooth
+            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetooth])
+            
+            // Activate the session
             try session.setActive(true)
+            
+            // Select the built-in microphone
+            if let builtInMic = session.availableInputs?.first(where: { $0.portType == .builtInMic }) {
+                try session.setPreferredInput(builtInMic)
+                print("Selected Built-In Microphone: \(builtInMic.portName)")
+            } else {
+                print("Built-In Microphone not found. Using default input.")
+            }
             
             // Initialize and prepare the recorder
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -93,10 +105,12 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
             audioRecorder?.record()
             
             isRecording = true
+            print("Recording started with URL: \(audioFilename)")
         } catch {
             print("Could not start recording: \(error.localizedDescription)")
         }
     }
+    
 
     func stopRecording() {
         audioRecorder?.stop()
@@ -172,8 +186,7 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
             let files = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
             let m4aFiles = files.filter { $0.pathExtension == "m4a" }
             DispatchQueue.main.async {
-                // Clear existing segments if needed
-                self.variables.meditationSegments.removeAll()
+        
                 
                 // Append fetched recordings to meditationSegments
                 for url in m4aFiles.sorted(by: { $0.lastPathComponent > $1.lastPathComponent }) {
@@ -189,12 +202,21 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
     func deleteRecording(url: URL) {
         do {
             try FileManager.default.removeItem(at: url)
-            fetchRecordings()
         } catch {
             print("Could not delete recording: \(error.localizedDescription)")
         }
     }
     
+    func appendNewRecording() {
+        guard let url = variables.audioRecorder?.url else {
+            print("No recording URL found.")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.variables.meditationSegments.append(MeditationSegment(type: .recording(url)))
+        }
+    }
 
 }
 
@@ -209,9 +231,11 @@ extension AudioRecorder {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
             print("Recording finished successfully.")
-            fetchRecordings()
+            appendNewRecording()
         } else {
             print("Recording failed.")
         }
     }
+    
+
 }

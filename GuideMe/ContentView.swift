@@ -28,7 +28,7 @@ struct ContentView: View {
     
     @State private var offset: Double = 0.0
     
-    @State private var editMeditation: Bool = false
+    @State private var editMeditation: Bool = true
     
     @State private var showPermissionAlert = false
     
@@ -607,7 +607,7 @@ struct CustomPickerView: View {
     @ObservedObject var variables = CrossAppVariables.shared
     @ObservedObject var silentRecorder = SilentRecorder.shared
     
-    let options = [5, 10, 15] // Silence durations in minutes
+    let options = [1, 2, 3, 5, 10, 15] // Silence durations in minutes
     @State private var selectedMinutes: Int = 5 // Default value
     
     var body: some View {
@@ -640,7 +640,7 @@ struct CustomPickerView: View {
                     ScrollView {
                         ForEach(options, id: \.self) { duration in
                             Button(action: {
-                                let silenceDurationInSeconds = Double(duration * 6)
+                                let silenceDurationInSeconds = Double(duration * 60)
                                 variables.meditationSegments.append(MeditationSegment(type: .silence(silenceDurationInSeconds)))
                                 withAnimation {
                                     variables.isPickerOpen = false

@@ -58,8 +58,8 @@ class SilentRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 playNextSegment(segments: segments)
             }
         case .silence(let duration):
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                guard let self = self else { return }
+            // Wait for the duration
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                 self.currentSegmentIndex += 1
                 self.playNextSegment(segments: segments)
             }
