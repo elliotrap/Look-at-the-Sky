@@ -14,6 +14,9 @@
 		212686762C9915F5009A770B /* GuideMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212686752C9915F5009A770B /* GuideMeTests.swift */; };
 		212686802C9915F5009A770B /* GuideMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126867F2C9915F5009A770B /* GuideMeUITests.swift */; };
 		212686822C9915F5009A770B /* GuideMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212686812C9915F5009A770B /* GuideMeUITestsLaunchTests.swift */; };
+		212686902C9A0151009A770B /* AudioSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126868F2C9A0151009A770B /* AudioSystem.swift */; };
+		212686922C9A3531009A770B /* SilentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212686912C9A3531009A770B /* SilentSystem.swift */; };
+		212686942C9A4552009A770B /* CrossAppVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212686932C9A4552009A770B /* CrossAppVariables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,10 @@
 		2126867B2C9915F5009A770B /* GuideMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuideMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2126867F2C9915F5009A770B /* GuideMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideMeUITests.swift; sourceTree = "<group>"; };
 		212686812C9915F5009A770B /* GuideMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2126868E2C995B75009A770B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2126868F2C9A0151009A770B /* AudioSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSystem.swift; sourceTree = "<group>"; };
+		212686912C9A3531009A770B /* SilentSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentSystem.swift; sourceTree = "<group>"; };
+		212686932C9A4552009A770B /* CrossAppVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossAppVariables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +101,12 @@
 		212686632C9915F3009A770B /* GuideMe */ = {
 			isa = PBXGroup;
 			children = (
+				2126868E2C995B75009A770B /* Info.plist */,
 				212686642C9915F3009A770B /* GuideMeApp.swift */,
+				212686932C9A4552009A770B /* CrossAppVariables.swift */,
 				212686662C9915F3009A770B /* ContentView.swift */,
+				2126868F2C9A0151009A770B /* AudioSystem.swift */,
+				212686912C9A3531009A770B /* SilentSystem.swift */,
 				212686682C9915F5009A770B /* Assets.xcassets */,
 				2126866A2C9915F5009A770B /* Preview Content */,
 			);
@@ -258,7 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				212686672C9915F3009A770B /* ContentView.swift in Sources */,
+				212686922C9A3531009A770B /* SilentSystem.swift in Sources */,
 				212686652C9915F3009A770B /* GuideMeApp.swift in Sources */,
+				212686902C9A0151009A770B /* AudioSystem.swift in Sources */,
+				212686942C9A4552009A770B /* CrossAppVariables.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +439,7 @@
 				DEVELOPMENT_TEAM = SDVM3QJL8X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuideMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,6 +469,7 @@
 				DEVELOPMENT_TEAM = SDVM3QJL8X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuideMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
